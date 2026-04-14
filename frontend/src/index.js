@@ -7,15 +7,17 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import './assets/styles/bootstrap.css'; 
+import './assets/styles/index.css';
+//import './assets/styles/index.css'; 
 import App from './App';
+import reportWebVitals from './reportWebVitals';
 import HomeScreen from './screens/HomeScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      {/* index={true} znači da je ovo početna stranica */}
-      <Route index={true} path="/" element={<HomeScreen />} />
+      <Route index={true} path="/" element={<HomeScreen/>}></Route>
     </Route>
   )
 );
@@ -27,3 +29,4 @@ root.render(
   </React.StrictMode>
 );
 
+reportWebVitals();

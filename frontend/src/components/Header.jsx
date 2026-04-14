@@ -1,43 +1,54 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import logo from '../assets/logo_ordinacija.png';
+import { FaCalendarPlus, FaUser } from 'react-icons/fa';
 
 const Header = () => {
     return (
         <header>
-            {/*bg="primary" daje plavu boju, variant="dark" beli tekst */}
             <Navbar bg="primary" variant="dark" expand="md" collapseOnSelect>
                 <Container>
-                    {/* LinkContainer omogućava da klik na naziv vodi na početnu bez osvežavanja stranice */}
                     <LinkContainer to="/">
-                        <Navbar.Brand>
-                            <span className="fw-bold">STOMATOLOŠKA ORDINACIJA</span>
+                        <Navbar.Brand className="d-flex align-items-center">
+                            <img 
+                                src={logo} 
+                                alt="Logo Ordinacije" 
+                                width="40" 
+                                height="40" 
+                                className="d-inline-block align-top me-2" 
+                            />
+                            <div>
+                                <span className="fw-bold">OSMEH & ZDRAVLJE</span>
+                                <br />
+                                <small style={{ fontSize: '0.65rem', display: 'block', marginTop: '-5px' }}>
+                                    STOMATOLOŠKA ORDINACIJA
+                                </small>
+                            </div>
                         </Navbar.Brand>
                     </LinkContainer>
-                    
+
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            
-                            <LinkContainer to='/usluge'>
-                                <Nav.Link>Usluge</Nav.Link>
-                            </LinkContainer>
-
                             <LinkContainer to='/zakazivanje'>
-                                <Nav.Link>Zakaži termin</Nav.Link>
+                                <Nav.Link>
+                                    <FaCalendarPlus className="me-1" /> Zakazivanje
+                                </Nav.Link>
                             </LinkContainer>
 
-                            <LinkContainer to='/prijava'>
-                                <Nav.Link>Prijava</Nav.Link>
+                            <LinkContainer to='/login'>
+                                <Nav.Link>
+                                    <FaUser className="me-1" /> Prijava
+                                </Nav.Link>
                             </LinkContainer>
-
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
         </header>
-    )
+    );
 }
 
 export default Header;
