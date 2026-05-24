@@ -18,13 +18,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
-
+import RegisterScreen from './screens/RegisterScreen';
+import ServiceScreen from './screens/ServiceScreen';
+import AppointmentScreen from './screens/AppointmentScreen';
+import PatientInfoScreen from './screens/InfoScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import ConfirmAppointmentScreen from './screens/ConfirmAppointmentScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index element={<HomeScreen />} />
       <Route path="login" element={<LoginScreen />} />
+      <Route path="register" element={<RegisterScreen />} />
+      <Route path="service/:id" element={<ServiceScreen />} />
+      <Route path="appointment" element={<AppointmentScreen />} />
+      <Route path="patient-info" element={<PatientInfoScreen />} />
+      <Route path="payment" element={<PaymentScreen />} />
+      <Route path="confirmation" element={<ConfirmAppointmentScreen />} />
     </Route>
   )
 );

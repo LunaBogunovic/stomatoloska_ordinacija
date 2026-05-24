@@ -1,139 +1,97 @@
 import { useState } from 'react';
-
 import { Form, Button } from 'react-bootstrap';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 
-import { saveShippingAddress } from '../slices/cartSlice';
+import { savePatientInfo } from '../slices/appointmentSlice';
 
 const PatientInfoScreen = () => {
-    const cart = useSelector((state) => state.cart);
+  const appointment = useSelector((state) => state.appointment);
+  const { patientInfo } = appointment;
 
-    const { shippingAddress } = cart;
+  const [address, setAddress] = useState(patientInfo?.address || '');
+  const [city, setCity] = useState(patientInfo?.city || '');
+  const [postalCode, setPostalCode] = useState(patientInfo?.postalCode || '');
+  const [country, setCountry] = useState(patientInfo?.country || '');
 
-    const [address, setAddress] = useState(
-        shippingAddress?.address || ''
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      savePatientInfo({
+        address,
+        city,
+        postalCode,
+        country,
+      })
     );
 
-    const [city, setCity] = useState(
-        shippingAddress?.city || ''
-    );
+    navigate('/payment');
+  };
 
-    const [postalCode, setPostalCode] = useState(
-        shippingAddress?.postalCode || ''
-    );
+  return (
+    <FormContainer>
+      <CheckoutSteps step1 step2 />
 
-    const [country, setCountry] = useState(
-        shippingAddress?.country || ''
-    );
+      <h1>Podaci pacijenta</h1>
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+      <Form onSubmit={submitHandler}>
+        <Form.Group controlId="address" className="my-2">
+          <Form.Label>Adresa</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Unesite adresu"
+            value={address}
+            required
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </Form.Group>
 
-    const submitHandler = (e) => {
-        e.preventDefault();
+        <Form.Group controlId="city" className="my-2">
+          <Form.Label>Grad</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Unesite grad"
+            value={city}
+            required
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </Form.Group>
 
-        dispatch(
-            saveShippingAddress({
-                address,
-                city,
-                postalCode,
-                country,
-            })
-        );
+        <Form.Group controlId="postalCode" className="my-2">
+          <Form.Label>Poštanski broj</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Unesite poštanski broj"
+            value={postalCode}
+            required
+            onChange={(e) => setPostalCode(e.target.value)}
+          />
+        </Form.Group>
 
-        navigate('/payment');
-    };
+        <Form.Group controlId="country" className="my-2">
+          <Form.Label>Država</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Unesite državu"
+            value={country}
+            required
+            onChange={(e) => setCountry(e.target.value)}
+          />
+        </Form.Group>
 
-    return (
-        <FormContainer>
-            <CheckoutSteps step1 step2 />
-
-            <h1>Podaci pacijenta</h1>
-
-            <Form onSubmit={submitHandler}>
-                <Form.Group
-                    controlId='address'
-                    className='my-2'
-                >
-                    <Form.Label>Adresa</Form.Label>
-
-                    <Form.Control
-                        type='text'
-                        placeholder='Unesite adresu'
-                        value={address}
-                        required
-                        onChange={(e) =>
-                            setAddress(e.target.value)
-                        }
-                    />
-                </Form.Group>
-
-                <Form.Group
-                    controlId='city'
-                    className='my-2'
-                >
-                    <Form.Label>Grad</Form.Label>
-
-                    <Form.Control
-                        type='text'
-                        placeholder='Unesite grad'
-                        value={city}
-                        required
-                        onChange={(e) =>
-                            setCity(e.target.value)
-                        }
-                    />
-                </Form.Group>
-
-                <Form.Group
-                    controlId='postalCode'
-                    className='my-2'
-                >
-                    <Form.Label>Poštanski broj</Form.Label>
-
-                    <Form.Control
-                        type='text'
-                        placeholder='Unesite poštanski broj'
-                        value={postalCode}
-                        required
-                        onChange={(e) =>
-                            setPostalCode(e.target.value)
-                        }
-                    />
-                </Form.Group>
-
-                <Form.Group
-                    controlId='country'
-                    className='my-2'
-                >
-                    <Form.Label>Država</Form.Label>
-
-                    <Form.Control
-                        type='text'
-                        placeholder='Unesite državu'
-                        value={country}
-                        required
-                        onChange={(e) =>
-                            setCountry(e.target.value)
-                        }
-                    />
-                </Form.Group>
-
-                <Button
-                    type='submit'
-                    variant='primary'
-                    className='my-2'
-                >
-                    Nastavi
-                </Button>
-            </Form>
-        </FormContainer>
-    );
+        <Button type="submit" variant="primary" className="my-2">
+          Nastavi
+        </Button>
+      </Form>
+    </FormContainer>
+  );
 };
 
 export default PatientInfoScreen;
