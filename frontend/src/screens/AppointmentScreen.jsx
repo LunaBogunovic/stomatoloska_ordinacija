@@ -26,7 +26,7 @@ const AppointmentScreen = () => {
   };
 
   const appointmentHandler = () => {
-    navigate('/login?redirect=/patient-info');
+    navigate('/patient-info'); // ovde dodati /login?redirect= ispred /patient kad se doda backend
   };
 
   return (

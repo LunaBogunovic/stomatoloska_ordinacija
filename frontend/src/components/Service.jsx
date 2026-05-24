@@ -5,13 +5,13 @@ import Rating from "./Rating"; // Proveri da li si iskopirala i Rating.jsx iz sk
 
 const Service = ({ service }) => {
     return (
-        <Card className="my-3 p-2 rounded shadow-sm">
+        <Card className="my-3 p-3 rounded h-100 shadow-sm service-card">
             {/* Link vodi na detalje usluge */}
             <Link to={`/service/${service._id}`}>
                 <Card.Img 
                     src={service.image} 
                     variant='top' 
-                    style={{ height: '200px', objectFit: 'cover' }} 
+                    style={{ height: '230px', objectFit: 'cover' }} 
                 />
             </Link>
 

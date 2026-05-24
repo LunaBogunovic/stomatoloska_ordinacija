@@ -25,6 +25,7 @@ import PatientInfoScreen from './screens/InfoScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import ConfirmAppointmentScreen from './screens/ConfirmAppointmentScreen';
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="patient-info" element={<PatientInfoScreen />} />
       <Route path="payment" element={<PaymentScreen />} />
       <Route path="confirmation" element={<ConfirmAppointmentScreen />} />
+
     </Route>
   )
 );
