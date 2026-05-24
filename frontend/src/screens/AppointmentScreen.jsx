@@ -2,22 +2,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
+
 import Message from '../components/Message';
-import { addToCart, removeFromCart } from '../slices/cartSlice';
+
+import {
+  addToAppointment,
+  removeFromAppointment,
+} from '../slices/appointmentSlice';
 
 const AppointmentScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const appointment = useSelector((state) => state.appointment);
+  const { appointmentItems } = appointment;
 
-  const addToCartHandler = async (service, qty) => {
-    dispatch(addToCart({ ...service, qty }));
+  const addToAppointmentHandler = (service, qty) => {
+    dispatch(addToAppointment({ ...service, qty }));
   };
 
-  const removeFromCartHandler = async (id) => {
-    dispatch(removeFromCart(id));
+  const removeFromAppointmentHandler = (id) => {
+    dispatch(removeFromAppointment(id));
   };
 
   const appointmentHandler = () => {
@@ -29,13 +34,13 @@ const AppointmentScreen = () => {
       <Col md={8}>
         <h1 style={{ marginBottom: '20px' }}>Zakazivanje termina</h1>
 
-        {cartItems.length === 0 ? (
+        {appointmentItems.length === 0 ? (
           <Message>
             Niste izabrali nijednu uslugu. <Link to="/">Vrati se nazad</Link>
           </Message>
         ) : (
           <ListGroup variant="flush">
-            {cartItems.map((item) => (
+            {appointmentItems.map((item) => (
               <ListGroup.Item key={item._id}>
                 <Row>
                   <Col md={2}>
@@ -53,7 +58,7 @@ const AppointmentScreen = () => {
                       as="select"
                       value={item.qty}
                       onChange={(e) =>
-                        addToCartHandler(item, Number(e.target.value))
+                        addToAppointmentHandler(item, Number(e.target.value))
                       }
                     >
                       <option value={1}>1</option>
@@ -63,7 +68,7 @@ const AppointmentScreen = () => {
                   <Col md={2}>
                     <Button
                       variant="light"
-                      onClick={() => removeFromCartHandler(item._id)}
+                      onClick={() => removeFromAppointmentHandler(item._id)}
                     >
                       <FaTrash />
                     </Button>
@@ -79,9 +84,9 @@ const AppointmentScreen = () => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Izabrane usluge: {cartItems.length}</h2>
+              <h2>Izabrane usluge: {appointmentItems.length}</h2>
               Ukupno:{' '}
-              {cartItems
+              {appointmentItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}{' '}
               RSD
@@ -91,7 +96,7 @@ const AppointmentScreen = () => {
               <Button
                 type="button"
                 className="btn-block"
-                disabled={cartItems.length === 0}
+                disabled={appointmentItems.length === 0}
                 onClick={appointmentHandler}
               >
                 Nastavi zakazivanje

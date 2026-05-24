@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import services from "../services_list"; // Promenjeno ime fajla
-import Service from "../components/Service"; // Promenjeno iz Product u Service
+import services from "../services_list"; 
+import Service from "../components/Service"; 
 
 const HomeScreen = () => {
     return (
