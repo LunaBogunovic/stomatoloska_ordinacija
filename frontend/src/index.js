@@ -33,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="register" element={<RegisterScreen />} />
       <Route path="service/:id" element={<ServiceScreen />} />
       <Route path="appointment" element={<AppointmentScreen />} />
+      <Route path="zakazivanje" element={<AppointmentScreen />} />
       <Route path="patient-info" element={<PatientInfoScreen />} />
       <Route path="payment" element={<PaymentScreen />} />
       <Route path="confirmation" element={<ConfirmAppointmentScreen />} />
