@@ -37,6 +37,11 @@ const Header = () => {
                                     <FaCalendarPlus className="me-1" /> Zakazivanje
                                 </Nav.Link>
                             </LinkContainer>
+                            <LinkContainer to='/karton'>
+                                <Nav.Link>
+                                    <FaUser className="me-1" /> Moj karton
+                                </Nav.Link>
+                            </LinkContainer>
 
                             <LinkContainer to='/login'>
                                 <Nav.Link>

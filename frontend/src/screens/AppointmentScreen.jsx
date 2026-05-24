@@ -101,6 +101,22 @@ const AppointmentScreen = () => {
               >
                 Nastavi zakazivanje
               </Button>
+              <Form.Group className="my-3">
+  <Form.Label>Datum termina</Form.Label>
+
+  <Form.Control type="date" />
+</Form.Group>
+
+<Form.Group className="my-3">
+  <Form.Label>Vreme termina</Form.Label>
+  <Form.Select> 
+    <option>09:00</option>
+    <option>10:30</option>
+    <option>12:00</option>
+    <option>14:00</option>
+    <option>16:00</option>
+  </Form.Select>
+</Form.Group>
             </ListGroup.Item>
           </ListGroup>
         </Card>
